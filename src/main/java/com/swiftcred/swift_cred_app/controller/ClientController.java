@@ -1,14 +1,12 @@
 package com.swiftcred.swift_cred_app.controller;
 
 import com.swiftcred.swift_cred_app.dtos.ClienteDTO;
-import com.swiftcred.swift_cred_app.entity.Cliente;
 import com.swiftcred.swift_cred_app.service.ClienteService;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -29,8 +27,11 @@ public class ClientController {
     }
 
     @GetMapping("/paginado")
-    public Page<ClienteDTO> listarTodosDTOPaginado(Pageable pageable) {
-        return clienteService.listarTodosDTOPaginado(pageable);
+    public Page<ClienteDTO> listarTodosDTOPaginado(
+            Pageable pageable,
+            @RequestParam(value = "filtro", required = false) String filtro
+    ) {
+        return clienteService.listarTodosDTOPaginado(filtro, pageable);
     }
 
 }
