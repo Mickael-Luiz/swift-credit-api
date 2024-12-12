@@ -35,12 +35,7 @@ public class Cliente {
 
     private String confiabilidade;
 
-    @ManyToOne
-    @JoinColumn(name = "recomendante")
-    private Cliente recomendante;
-
-    @Column(precision = 10, scale = 2)
-    private BigDecimal debito;
+    private String recomendante;
 
     public Long getId() {
         return id;
@@ -114,15 +109,11 @@ public class Cliente {
         this.confiabilidade = confiabilidade;
     }
 
-    public Cliente getRecomendante() {
+    public String getRecomendante() {
         return recomendante;
     }
 
-    public void setRecomendante(Cliente recomendante) {
+    public void setRecomendante(String recomendante) {
         this.recomendante = recomendante;
     }
-
-    public BigDecimal getDebito() { return debito; }
-
-    public void setDebito(BigDecimal debito) { this.debito = debito; }
 }

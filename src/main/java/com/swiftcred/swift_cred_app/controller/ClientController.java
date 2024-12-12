@@ -1,13 +1,13 @@
 package com.swiftcred.swift_cred_app.controller;
 
 import com.swiftcred.swift_cred_app.dtos.ClienteDTO;
+import com.swiftcred.swift_cred_app.entity.Cliente;
 import com.swiftcred.swift_cred_app.service.ClienteService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,17 +21,33 @@ public class ClientController {
         this.clienteService = clienteService;
     }
 
-    @GetMapping
-    public List<ClienteDTO> listarTodosDTO() {
-        return clienteService.listarTodosDTO();
-    }
-
     @GetMapping("/paginado")
     public Page<ClienteDTO> listarTodosDTOPaginado(
             Pageable pageable,
             @RequestParam(value = "filtro", required = false) String filtro
     ) {
         return clienteService.listarTodosDTOPaginado(filtro, pageable);
+    }
+
+    @GetMapping("/{id}")
+    public Cliente buscarPorId(@PathVariable Long id) {
+        return clienteService.buscarPorId(id);
+    }
+
+    @PostMapping()
+    public Cliente salvarCliente(@RequestBody Cliente cliente) {
+        return clienteService.salvarCliente(cliente);
+    }
+
+    @PutMapping
+    public Cliente atualizarCliente(@RequestBody Cliente cliente) {
+        return clienteService.atualizarCliente(cliente);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
+        clienteService.deletarCliente(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
 }
