@@ -15,7 +15,6 @@ public class ClienteDTO {
         this.telefone = telefone;
         this.confiabilidade = confiabilidade;
         this.debito = debito;
-
     }
 
     public Long getId() {

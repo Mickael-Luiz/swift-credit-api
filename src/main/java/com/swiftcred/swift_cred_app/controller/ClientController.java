@@ -21,6 +21,11 @@ public class ClientController {
         this.clienteService = clienteService;
     }
 
+    @GetMapping
+    public List<Cliente> buscarListaClientes() {
+        return clienteService.listarTodos();
+    }
+
     @GetMapping("/paginado")
     public Page<ClienteDTO> listarTodosDTOPaginado(
             Pageable pageable,
