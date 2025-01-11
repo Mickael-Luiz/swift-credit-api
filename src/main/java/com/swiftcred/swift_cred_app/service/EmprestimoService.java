@@ -51,9 +51,11 @@ public class EmprestimoService {
 
     public List<Emprestimo> listarEmprestimos(Long clienteId) {
         if(clienteId != null) {
-            return this.emprestimoRepository.findAllByCliente_Id(clienteId);
+            List<Emprestimo> emprestimos = emprestimoRepository.findAllByCliente_IdOrderByIdDesc(clienteId);
+            emprestimos.forEach(emprestimo -> System.out.println(emprestimo.getId()));
+            return emprestimos;
         } else {
-            return this.emprestimoRepository.findAll();
+            return this.emprestimoRepository.findAllOrderByIdDesc();
         }
     }
 

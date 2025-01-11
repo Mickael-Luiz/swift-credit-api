@@ -12,8 +12,12 @@ import java.util.List;
 public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long> {
 
     @Query("SELECT em FROM Emprestimo em " +
-            "WHERE em.cliente.id = :clienteId")
+            "WHERE em.cliente.id = :clienteId " +
+            "ORDER BY em.id DESC")
     public Page<Emprestimo> findAllByFiltro(@Param("clienteId") Long clienteId, Pageable pageable);
 
-    public List<Emprestimo> findAllByCliente_Id(Long clienteId);
+    public List<Emprestimo> findAllByCliente_IdOrderByIdDesc(Long clienteId);
+
+    @Query(" SELECT em FROM Emprestimo em ORDER BY em.id DESC")
+    public List<Emprestimo> findAllOrderByIdDesc();
 }
